@@ -28,6 +28,12 @@ public class MainSystem {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int menuNo = 0;
+		/*
+		 * ２  マジックナンバー、メッセージの定数化
+		 * ・finalが付いていれば、（フィールドであろうがローカルであろうが）変数は定数となる（Javaの場合）。
+		 * ・定数の命名ルール葉コーディング規約で決まっている。
+		 * 		全部大文字 + 単語の間はアンダースコア ← 定数と分かるし一般的
+		 */
 		final int ALL_DISPLAY = 1;
 		final int EMPLOYEE_NAME_SEARCH = 2;
 		final int DEPARTMENT_SEARCH = 3;
