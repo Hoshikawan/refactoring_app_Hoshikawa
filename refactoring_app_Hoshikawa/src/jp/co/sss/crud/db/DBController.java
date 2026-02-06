@@ -30,7 +30,8 @@ public class DBController {
 	 * @throws ClassNotFoundException ドライバクラスが不在の場合に送出
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 */
-	public static void find() throws ClassNotFoundException, SQLException {
+	// find → allDisplay（メソッド名の変更）
+	public static void allDisplay() throws ClassNotFoundException, SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -93,7 +94,8 @@ public class DBController {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static void findB() throws ClassNotFoundException, SQLException, IOException {
+	// findB → employeeNameSearch（メソッド名の変更）
+	public static void employeeNameSearch() throws ClassNotFoundException, SQLException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		// 検索ワード
@@ -173,7 +175,8 @@ public class DBController {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static void findC(String deptId) throws ClassNotFoundException, SQLException, IOException {
+	// findC → divisionSearch（メソッド名の変更）
+	public static void divisionSearch(String deptId) throws ClassNotFoundException, SQLException, IOException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -263,7 +266,7 @@ public class DBController {
 	 * @throws IOException             入力処理でエラーが発生した場合に送出
 	 * @throws ParseException 
 	 */
-	public static void insert(String empName, String gender, String birthday, String deptId)
+	public static void newInsert(String empName, String gender, String birthday, String deptId)
 			throws ClassNotFoundException, SQLException, IOException, ParseException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

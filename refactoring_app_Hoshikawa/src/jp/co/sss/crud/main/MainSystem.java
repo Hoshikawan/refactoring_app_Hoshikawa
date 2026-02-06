@@ -29,6 +29,11 @@ public class MainSystem {
 
 		int menuNo = 0;
 
+		/*
+		 * do-while文のdoは、条件チェックをすることなく必ず最初の一回はdoを通って処理を行う。
+		 * 		→つまり、最初の１回だけ条件チェックをしない。という意味であり、戻らないという事ではない。
+		 * ただ、条件チェックのタイミングがwhile文の後ろにあるだけで、条件式がないわけではない。
+		 */
 		do {
 			// メニューの表示
 			System.out.println("=== 社員管理システム ===");
@@ -42,14 +47,15 @@ public class MainSystem {
 			System.out.print("メニュー番号を入力してください：");
 
 			// メニュー番号の入力
-			String menuNoStr = br.readLine();
-			menuNo = Integer.parseInt(menuNoStr);
+			String stringMenuNumber = br.readLine();
+			menuNo = Integer.parseInt(stringMenuNumber);
 
 			// 機能の呼出
 			switch (menuNo) {
 			case 1:
 				// 全件表示機能の呼出
-				DBController.find();
+				// find → allDisplay（メソッド名の変更）
+				DBController.allDisplay();
 				break;
 
 			case 2:
@@ -57,7 +63,8 @@ public class MainSystem {
 				System.out.print("社員名:");
 
 				// 検索機能の呼出
-				DBController.findB();
+				// findB → employeeNameSearch（メソッド名の変更）
+				DBController.employeeNameSearch();
 				break;
 
 			case 3:
@@ -66,7 +73,8 @@ public class MainSystem {
 				String deptIdA = br.readLine();
 
 				// 検索機能の呼出
-				DBController.findC(deptIdA);
+				// findC → divisionSearch（メソッド名の変更）
+				DBController.divisionSearch(deptIdA);
 				break;
 
 			case 4:
@@ -81,7 +89,8 @@ public class MainSystem {
 				String deptIdB = br.readLine();
 
 				// 登録機能の呼出
-				DBController.insert(emp_name, Seibetsu, birthday, deptIdB);
+				// insert → newInsert（メソッド名の変更）
+				DBController.newInsert(emp_name, Seibetsu, birthday, deptIdB);
 				break;
 
 			case 5:
@@ -107,6 +116,24 @@ public class MainSystem {
 				break;
 
 			}
+			/*
+			 * whileの中に書く条件式は、「ループを続けたい条件」を書く。
+			 * 	条件式は「質問文」だと認識すると理解がしやすい。
+			 * 		menuNo != 7→「menuNoは7ではないか？」という質問。
+			 * 		・menuNo が 7 以外の場合
+			 * 			例）「1 != 7」, 「2 != 7」, 「3 != 7」, 「6 != 7」 など
+			 * 			→ 条件は true
+			 * 			→ ループを続ける
+			 *
+			 * 		・menuNo が 7 の場合
+			 * 			「7 != 7」 は成り立たない
+			 * 			→ 条件は false
+			 * 			→ ループを終了する
+			 * 	
+			 *  つまりこの条件式は「終了番号（7）が選ばれるまで、処理を繰り返す」という意味になる。
+			 * 	もし while (menuNo == 7) と書いてしまうと、「7 == 7」という意味になり、
+			 * 「7が選ばれている間だけループする」ことになり、終了したいのにループし続ける、逆の動きになる。
+			 */
 		} while (menuNo != 7);
 		System.out.println("システムを終了します。");
 	}
