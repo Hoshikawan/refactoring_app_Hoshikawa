@@ -28,6 +28,14 @@ public class MainSystem {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int menuNo = 0;
+		final int ALL_DISPLAY = 1;
+		final int EMPLOYEE_NAME_SEARCH = 2;
+		final int DEPARTMENT_SEARCH = 3;
+		final int NEW_INSERT = 4;
+		final int UPDATE = 5;
+		final int DELETE = 6;
+		final int END_SYSTEM = 7;
+		
 
 		/*
 		 * do-while文のdoは、条件チェックをすることなく必ず最初の一回はdoを通って処理を行う。
@@ -52,13 +60,13 @@ public class MainSystem {
 
 			// 機能の呼出
 			switch (menuNo) {
-			case 1:
+			case ALL_DISPLAY:
 				// 全件表示機能の呼出
 				// find → allDisplay（メソッド名の変更）
 				DBController.allDisplay();
 				break;
 
-			case 2:
+			case EMPLOYEE_NAME_SEARCH:
 				// 社員名検索
 				System.out.print("社員名:");
 
@@ -67,7 +75,7 @@ public class MainSystem {
 				DBController.employeeNameSearch();
 				break;
 
-			case 3:
+			case DEPARTMENT_SEARCH:
 				// 検索する部署IDを入力
 				System.out.print("部署ID(1:営業部、2:経理部、3:総務部)を入力してください:");
 				String deptIdA = br.readLine();
@@ -77,7 +85,7 @@ public class MainSystem {
 				DBController.divisionSearch(deptIdA);
 				break;
 
-			case 4:
+			case NEW_INSERT:
 				// 登録する値を入力
 				System.out.print("社員名:");
 				String emp_name = br.readLine();
@@ -93,7 +101,7 @@ public class MainSystem {
 				DBController.newInsert(emp_name, Seibetsu, birthday, deptIdB);
 				break;
 
-			case 5:
+			case UPDATE:
 				// 更新する社員IDを入力
 				System.out.print("更新する社員の社員IDを入力してください：");
 
@@ -107,7 +115,7 @@ public class MainSystem {
 
 				break;
 
-			case 6:
+			case DELETE:
 				// 削除する社員IDを入力
 				System.out.print("削除する社員の社員IDを入力してください：");
 
@@ -134,7 +142,7 @@ public class MainSystem {
 			 * 	もし while (menuNo == 7) と書いてしまうと、「7 == 7」という意味になり、
 			 * 「7が選ばれている間だけループする」ことになり、終了したいのにループし続ける、逆の動きになる。
 			 */
-		} while (menuNo != 7);
+		} while (menuNo != END_SYSTEM);
 		System.out.println("システムを終了します。");
 	}
 }
