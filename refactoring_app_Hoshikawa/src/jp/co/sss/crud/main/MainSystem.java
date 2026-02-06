@@ -81,24 +81,24 @@ public class MainSystem {
 				String deptIdA = br.readLine();
 
 				// 検索機能の呼出
-				// findC → divisionSearch（メソッド名の変更）
-				DBController.divisionSearch(deptIdA);
+				// findC → departmentSearch（メソッド名の変更）
+				DBController.departmentSearch(deptIdA);
 				break;
 
 			case NEW_INSERT:
 				// 登録する値を入力
 				System.out.print("社員名:");
-				String emp_name = br.readLine();
+				String empName = br.readLine();
 				System.out.print("性別(0:その他, 1:男性, 2:女性, 9:回答なし):");
-				String Seibetsu = br.readLine();
+				String gender = br.readLine();
 				System.out.print("生年月日(西暦年/月/日):");
 				String birthday = br.readLine();
 				System.out.print("部署ID(1:営業部、2:経理部、3:総務部):");
-				String deptIdB = br.readLine();
+				String deptId = br.readLine();
 
 				// 登録機能の呼出
 				// insert → newInsert（メソッド名の変更）
-				DBController.newInsert(emp_name, Seibetsu, birthday, deptIdB);
+				DBController.newInsert(empName, gender, birthday, deptId);
 				break;
 
 			case UPDATE:
@@ -106,11 +106,11 @@ public class MainSystem {
 				System.out.print("更新する社員の社員IDを入力してください：");
 
 				// 更新する値を入力する
-				String empId_1 = br.readLine();
-				Integer.parseInt(empId_1);
+				String updateEmployeeId = br.readLine();
+				Integer.parseInt(updateEmployeeId);
 
 				// 更新機能の呼出
-				DBController.update(empId_1);
+				DBController.update(updateEmployeeId);
 				System.out.println("社員情報を更新しました");
 
 				break;

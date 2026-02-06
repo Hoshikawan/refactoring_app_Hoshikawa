@@ -176,7 +176,7 @@ public class DBController {
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
 	// findC → divisionSearch（メソッド名の変更）
-	public static void divisionSearch(String deptId) throws ClassNotFoundException, SQLException, IOException {
+	public static void departmentSearch(String deptId) throws ClassNotFoundException, SQLException, IOException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
