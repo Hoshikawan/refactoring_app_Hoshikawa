@@ -10,7 +10,10 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import jp.co.sss.crud.dto.Employee;
 import jp.co.sss.crud.util.ConstantSQL;
 
 /**
@@ -23,6 +26,8 @@ public class DBController {
 	/** インスタンス化を禁止 */
 	private DBController() {
 	}
+
+	private static final String EMPLOYEE_INFORMATION_LIST = "社員ID\t社員名\t性別\t生年月日\t部署名";
 
 	/**
 	 * 全ての社員情報を検索
@@ -53,27 +58,39 @@ public class DBController {
 			}
 
 			// レコードを出力
-			System.out.println("社員ID\t社員名\t性別\t生年月日\t部署名");
+			System.out.println(EMPLOYEE_INFORMATION_LIST);
 			while (resultSet.next()) {
-				System.out.print(resultSet.getString("emp_id") + "\t");
-				System.out.print(resultSet.getString("emp_name") + "\t");
-
-				int gender = Integer.parseInt(resultSet.getString("gender"));
-				if (gender == 0) {
-					System.out.print("回答なし" + "\t");
-				} else if (gender == 1) {
-					System.out.print("男性" + "\t");
-
-				} else if (gender == 2) {
-					System.out.print("女性" + "\t");
-
-				} else if (gender == 9) {
-					System.out.print("その他" + "\t");
-
-				}
-
-				System.out.print(resultSet.getString("birthday") + "\t");
-				System.out.println(resultSet.getString("dept_name"));
+				Employee empDto = new Employee();
+				
+				empDto.setEmpId(resultSet.getInt("emp_id"));
+				empDto.setEmpName(resultSet.getString("emp_name"));
+				empDto.setGender(resultSet.getInt("gender"));
+				
+				String birthdayStr = resultSet.getString("birthday");
+				LocalDate birthday = LocalDate.parse(birthdayStr, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+				empDto.setBirthday(birthday);
+				empDto.setDeptName(resultSet.getString("dept_name"));
+				
+				System.out.println(empDto);
+				
+//				System.out.print(resultSet.getString("emp_id") + "\t");
+//				System.out.print(resultSet.getString("emp_name") + "\t");
+//
+//				int gender = Integer.parseInt(resultSet.getString("gender"));
+//				if (gender == 0) {
+//					System.out.print("回答なし" + "\t");
+//				} else if (gender == 1) {
+//					System.out.print("男性" + "\t");
+//
+//				} else if (gender == 2) {
+//					System.out.print("女性" + "\t");
+//
+//				} else if (gender == 9) {
+//					System.out.print("その他" + "\t");
+//				}
+//
+//				System.out.print(resultSet.getString("birthday") + "\t");
+//				System.out.println(resultSet.getString("dept_name"));
 			}
 
 			System.out.println("");
@@ -126,34 +143,48 @@ public class DBController {
 				return;
 			}
 
-			System.out.println("社員ID\t社員名\t性別\t生年月日\t部署名");
+			System.out.println(EMPLOYEE_INFORMATION_LIST);
 			while (resultSet.next()) {
-				System.out.print(resultSet.getString("emp_id"));
-				System.out.print("\t");
-
-				System.out.print(resultSet.getString("emp_name"));
-				System.out.print("\t");
-
-				String genderString = resultSet.getString("gender");
-				int gender = Integer.parseInt(genderString);
-				if (gender == 0) {
-					System.out.print("回答なし");
-				} else if (gender == 1) {
-					System.out.print("男性");
-
-				} else if (gender == 2) {
-					System.out.print("女性");
-
-				} else if (gender == 9) {
-					System.out.print("その他");
-
-				}
-
-				System.out.print("\t");
-				System.out.print(resultSet.getString("birthday"));
-				System.out.print("\t");
-
-				System.out.println(resultSet.getString("dept_name"));
+				
+				Employee empDto = new Employee();
+				
+				empDto.setEmpId(resultSet.getInt("emp_id"));
+				empDto.setEmpName(resultSet.getString("emp_name"));
+				empDto.setGender(resultSet.getInt("gender"));
+				
+				String birthdayStr = resultSet.getString("birthday");
+				LocalDate birthday = LocalDate.parse(birthdayStr, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+				empDto.setBirthday(birthday);
+				empDto.setDeptName(resultSet.getString("dept_name"));
+				
+				System.out.println(empDto);
+				
+//				System.out.print(resultSet.getString("emp_id"));
+//				System.out.print("\t");
+//
+//				System.out.print(resultSet.getString("emp_name"));
+//				System.out.print("\t");
+//
+//				String genderString = resultSet.getString("gender");
+//				int gender = Integer.parseInt(genderString);
+//				if (gender == 0) {
+//					System.out.print("回答なし");
+//				} else if (gender == 1) {
+//					System.out.print("男性");
+//
+//				} else if (gender == 2) {
+//					System.out.print("女性");
+//
+//				} else if (gender == 9) {
+//					System.out.print("その他");
+//
+//				}
+//
+//				System.out.print("\t");
+//				System.out.print(resultSet.getString("birthday"));
+//				System.out.print("\t");
+//
+//				System.out.println(resultSet.getString("dept_name"));
 			}
 
 			System.out.println("");
@@ -204,43 +235,57 @@ public class DBController {
 				return;
 			}
 
-			System.out.println("社員ID\t社員名\t性別\t生年月日\t部署名");
+			System.out.println(EMPLOYEE_INFORMATION_LIST);
 			while (resultSet.next()) {
-				System.out.print(resultSet.getString("emp_id"));
-				System.out.print("\t");
-
-				System.out.print(resultSet.getString("emp_name"));
-				System.out.print("\t");
-
-				String genderString = resultSet.getString("gender");
-				int gender = Integer.parseInt(genderString);
-				if (gender == 0) {
-					System.out.print("回答なし");
-				} else if (gender == 1) {
-					System.out.print("男性");
-
-				} else if (gender == 2) {
-					System.out.print("女性");
-
-				} else if (gender == 9) {
-					System.out.print("その他");
-
-				}
-
-				System.out.print("\t");
-				System.out.print(resultSet.getString("birthday"));
-				System.out.print("\t");
-
-				String deptIdString = resultSet.getString("dept_id");
-				int deptId2 = Integer.parseInt(deptIdString);
-				if (deptId2 == 1) {
-					System.out.println("営業部");
-				} else if (deptId2 == 2) {
-					System.out.println("経理部");
-				} else if (gender == 3) {
-					System.out.println("総務部");
-
-				}
+				
+				Employee empDto = new Employee();
+				
+				empDto.setEmpId(resultSet.getInt("emp_id"));
+				empDto.setEmpName(resultSet.getString("emp_name"));
+				empDto.setGender(resultSet.getInt("gender"));
+				
+				String birthdayStr = resultSet.getString("birthday");
+				LocalDate birthday = LocalDate.parse(birthdayStr, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+				empDto.setBirthday(birthday);
+				empDto.setDeptName(resultSet.getString("dept_name"));
+				
+				System.out.println(empDto);
+				
+//				System.out.print(resultSet.getString("emp_id"));
+//				System.out.print("\t");
+//
+//				System.out.print(resultSet.getString("emp_name"));
+//				System.out.print("\t");
+//
+//				String genderString = resultSet.getString("gender");
+//				int gender = Integer.parseInt(genderString);
+//				if (gender == 0) {
+//					System.out.print("回答なし");
+//				} else if (gender == 1) {
+//					System.out.print("男性");
+//
+//				} else if (gender == 2) {
+//					System.out.print("女性");
+//
+//				} else if (gender == 9) {
+//					System.out.print("その他");
+//
+//				}
+//
+//				System.out.print("\t");
+//				System.out.print(resultSet.getString("birthday"));
+//				System.out.print("\t");
+//
+//				String deptIdString = resultSet.getString("dept_id");
+//				int deptId2 = Integer.parseInt(deptIdString);
+//				if (deptId2 == 1) {
+//					System.out.println("営業部");
+//				} else if (deptId2 == 2) {
+//					System.out.println("経理部");
+//				} else if (gender == 3) {
+//					System.out.println("総務部");
+//
+//				}
 			}
 
 			System.out.println("");
